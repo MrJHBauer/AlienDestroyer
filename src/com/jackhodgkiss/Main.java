@@ -28,10 +28,6 @@ public class Main extends PApplet {
 		}
 	}
 	
-	public void mouseClicked() {
-		actors.add(new Ball(mouseX, mouseY, "data/Wood/elementWood000.png", this));
-	}
-	
 	public void draw() {
 		update();
 		background(180);
