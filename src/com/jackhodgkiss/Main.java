@@ -28,6 +28,10 @@ public class Main extends PApplet {
 		}
 	}
 	
+	public void mouseClicked() {
+		actors.add(new PhysicalElement(mouseX, mouseY, Element.values()[(int) random(0, Element.values().length)], this));
+	}
+	
 	public void draw() {
 		update();
 		background(180);
