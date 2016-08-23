@@ -20,6 +20,7 @@ public class Main extends PApplet {
 	public void setup() {
 		background(180);
 		world = PhysiVals.getWorldInstance();
+		actors.add(new Floor(width / 2, height + 5, width, 10));
 	}
 	
 	public void update() {
@@ -27,9 +28,6 @@ public class Main extends PApplet {
 		for(Actor a : actors) {
 			if(a.getBody() != null) {
 				a.update();
-				if(a.getSprite().getY() > height + 100) {
-					a.kill();
-				}
 			} else {
 				actorsToRemove.add(a);
 			}
