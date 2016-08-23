@@ -39,8 +39,11 @@ public class Main extends PApplet {
 	}
 	
 	public void mouseClicked() {
-		actors.add(new PhysicalElement(mouseX, mouseY, Element.values()[(int) random(0, Element.values().length)], this));
-		System.out.println(actors);
+		if(Math.random() <= 0.5) {
+			actors.add(new PhysicalElement(mouseX, mouseY, Element.values()[(int) random(0, Element.values().length)], this));
+		} else {
+			actors.add(new PhysicalAlien(mouseX, mouseY, Alien.values()[(int) random(0, Alien.values().length)], this));
+		}
 	}
 	
 	public void draw() {
