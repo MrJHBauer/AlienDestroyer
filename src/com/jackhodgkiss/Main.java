@@ -20,6 +20,7 @@ public class Main extends PApplet {
 	public void setup() {
 		background(180);
 		world = PhysiVals.getWorldInstance();
+		world.setContactListener(new ContactListener());
 		actors.add(new Floor(width / 2, height + 5, width, 10));
 	}
 	
