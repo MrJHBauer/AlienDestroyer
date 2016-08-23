@@ -33,7 +33,13 @@ public class Actor {
 
 	protected void setBody(Body body) {
 		this.body = body;
-		body.setUserData(this);
+		if(body != null) {
+			body.setUserData(this);
+		}
+	}
+	
+	protected void kill() {
+		destroyBody();
 	}
 	
 	protected void destroyBody() {
