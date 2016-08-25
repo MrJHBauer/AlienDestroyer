@@ -13,6 +13,8 @@ public class Main extends PApplet {
 	ArrayList<Actor> actors = new ArrayList<>();
 	ArrayList<Actor> actorsToRemove = new ArrayList<>();
 	
+	PhysicalAlien alien;
+	
 	public void settings() {
 		size(1280, 720);
 	}
@@ -22,6 +24,14 @@ public class Main extends PApplet {
 		world = PhysiVals.getWorldInstance();
 		world.setContactListener(new ContactListener());
 		actors.add(new Floor(width / 2, height + 5, width, 10));
+		actors.add(new PhysicalElement(width / 2 - (220 / 2) + 35, height - 35, Element.Wood010, this));
+		actors.add(new PhysicalElement(width / 2 + (220 / 2) - 35, height - 35, Element.Wood010, this));
+		actors.add(new PhysicalElement(width / 2, height - 105, Element.Wood012, this));
+		actors.add(new PhysicalElement(width / 2 - (220 / 2) + 35, height - 175, Element.Wood010, this));
+		actors.add(new PhysicalElement(width / 2 + (220 / 2) - 35, height - 175, Element.Wood010, this));
+		actors.add(new PhysicalElement(width / 2, height - 245, Element.Wood012, this));
+		alien = new PhysicalAlien(width / 2, height - 315, Alien.values()[(int) random(0, Alien.values().length)], this);
+		actors.add(alien);
 	}
 	
 	public void update() {
@@ -29,14 +39,14 @@ public class Main extends PApplet {
 		for(Actor a : actors) {
 			if(a.getBody() != null) {
 				a.update();
-				if(a instanceof PhysicalAlien) {
-					PhysicalAlien alien = (PhysicalAlien) a;
-					if(alien.isTouchedGround()) {
-						alien.kill();
-					}
-				}
 			} else {
 				actorsToRemove.add(a);
+			}
+		}
+		if(alien.isTouchedGround()) {
+			if(alien.body != null) {
+				alien.kill();
+				System.out.println("You Failed The Level, Alien Hit The Ground!");
 			}
 		}
 		actors.removeAll(actorsToRemove);
@@ -44,11 +54,7 @@ public class Main extends PApplet {
 	}
 	
 	public void mouseClicked() {
-		if(Math.random() <= 0.5) {
-			actors.add(new PhysicalElement(mouseX, mouseY, Element.values()[(int) random(0, Element.values().length)], this));
-		} else {
-			actors.add(new PhysicalAlien(mouseX, mouseY, Alien.values()[(int) random(0, Alien.values().length)], this));
-		}
+	
 	}
 	
 	public void draw() {
