@@ -67,6 +67,15 @@ public class Sprite {
 		return texture.height;
 	}
 	
+	public boolean isMouseOver() {
+		if(x - getWidth() / 2 < parent.mouseX && x + getWidth() / 2 > parent.mouseX &&
+				y - getHeight() / 2 < parent.mouseY && y + getHeight() / 2 > parent.mouseY) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public PImage getTexture() {
 		return texture;
 	}
