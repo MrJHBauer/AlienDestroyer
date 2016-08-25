@@ -54,7 +54,15 @@ public class Main extends PApplet {
 	}
 	
 	public void mouseClicked() {
-	
+		for(Actor a : actors) {
+			if(a instanceof PhysicalElement) {
+				if(a.body != null) {
+					if(a.getSprite().isMouseOver()) {
+						a.kill();
+					}
+				}
+			}
+		}
 	}
 	
 	public void draw() {
