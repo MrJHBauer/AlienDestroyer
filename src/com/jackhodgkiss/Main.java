@@ -29,6 +29,12 @@ public class Main extends PApplet {
 		for(Actor a : actors) {
 			if(a.getBody() != null) {
 				a.update();
+				if(a instanceof PhysicalAlien) {
+					PhysicalAlien alien = (PhysicalAlien) a;
+					if(alien.isTouchedGround()) {
+						alien.kill();
+					}
+				}
 			} else {
 				actorsToRemove.add(a);
 			}

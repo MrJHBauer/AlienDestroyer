@@ -11,6 +11,8 @@ import processing.core.PApplet;
 
 public class PhysicalAlien extends Actor {
 
+	private boolean touchedGround = false;
+	
 	private PolygonShape polygonShape;
 	private CircleShape circleShape;
 	private FixtureDef fixtureDefinition;
@@ -47,5 +49,13 @@ public class PhysicalAlien extends Actor {
 		
 		return body;
 	}
-	
+
+	public boolean isTouchedGround() {
+		return touchedGround;
+	}
+
+	public void setTouchedGround(boolean touchedGround) {
+		this.touchedGround = touchedGround;
+	}
+		
 }
