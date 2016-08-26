@@ -5,22 +5,16 @@ import processing.core.PConstants;
 
 public class Background {
 
-	private Sprite[] backgroundMap;
+	private Sprite background;
 	
 	public Background(PApplet parent) {
-		backgroundMap = new Sprite[(int) Math.ceil((double)parent.width / 1024)];
-		for(int i = 0; i < backgroundMap.length; i++) {
-			backgroundMap[i] = new Sprite(i * 1024, 0, URL.GRASS.getURL(), parent);
-			backgroundMap[i].setImageMode(PConstants.CORNER);
-			backgroundMap[i].getTexture().resize(backgroundMap[i].getTexture().width, 
-					parent.height > backgroundMap[i].getTexture().height ? parent.height : backgroundMap[i].getTexture().height);
-		}
+		background = new Sprite(0, 0, URL.GRASS.getURL(), parent);
+		background.setImageMode(PConstants.CORNER);
+		background.getTexture().resize(parent.width, parent.height);
 	}
 	
 	public void draw() {
-		for(Sprite s : backgroundMap) {
-			s.draw();
-		}
+		background.draw();
 	}
 	
 	private enum URL {
