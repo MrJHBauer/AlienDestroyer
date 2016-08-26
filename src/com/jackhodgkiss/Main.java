@@ -15,12 +15,15 @@ public class Main extends PApplet {
 	
 	PhysicalAlien alien;
 	
+	Background background;
+	
 	public void settings() {
 		size(1280, 720);
+		//fullScreen();
 	}
 	
 	public void setup() {
-		background(180);
+		background = new Background(this);
 		world = PhysiVals.getWorldInstance();
 		world.setContactListener(new ContactListener());
 		actors.add(new Floor(width / 2, height + 5, width, 10));
@@ -67,7 +70,7 @@ public class Main extends PApplet {
 	
 	public void draw() {
 		update();
-		background(180);
+		background.draw();
 		for(Actor a : actors) {
 			a.draw();
 		}

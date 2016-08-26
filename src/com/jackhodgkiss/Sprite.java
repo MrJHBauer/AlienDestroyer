@@ -12,6 +12,7 @@ public class Sprite {
 	
 	private PImage texture;
 	private boolean isVisible = true;
+	private int imageMode = PConstants.CENTER;
 	private PApplet parent;
 	
 	
@@ -25,7 +26,7 @@ public class Sprite {
 	
 	public void draw() {
 		if(isVisible) {
-			parent.imageMode(PConstants.CENTER);
+			parent.imageMode(imageMode);
 			parent.pushMatrix();
 			parent.translate(x, y);
 			parent.rotate(angle);
@@ -92,5 +93,12 @@ public class Sprite {
 		this.isVisible = isVisible;
 	}
 	
+	public int getImageMode() {
+		return imageMode;
+	}
+	
+	public void setImageMode(int mode) {
+		imageMode = mode;
+	}
 	
 }
