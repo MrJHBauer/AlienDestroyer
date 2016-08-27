@@ -38,7 +38,15 @@ public class Level {
 		alien = new PhysicalAlien(parent.width / 2, parent.height - 315, Alien.values()[(int) parent.random(0, Alien.values().length)], parent);
 		actors.add(alien);
 	}
-		
+	
+	private void reset() {
+		for(Actor a : actors) {
+			a.kill();
+		}
+		actors.clear();
+		generateLevel();
+	}
+	
 	public void update() {
 		world.step(1.0f / 60.0f, 8, 3);
 		if(parent.mousePressed == true) {
@@ -60,10 +68,7 @@ public class Level {
 			}
 		}
 		if(alien.isTouchedGround()) {
-			if(alien.body != null) {
-				alien.kill();
-				System.out.println("You Failed The Level, Alien Hit The Ground!");
-			}
+			reset();
 		}
 		actors.removeAll(actorsToRemove);
 		actorsToRemove.clear();

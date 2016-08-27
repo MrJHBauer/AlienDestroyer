@@ -1,7 +1,6 @@
 package com.jackhodgkiss;
 
 import processing.core.PApplet;
-import processing.core.PFont;
 
 public class Main extends PApplet {
 	
@@ -42,6 +41,7 @@ public class Main extends PApplet {
 		} else {
 			level.draw();
 		}
+		text("FrameCount: " + (int)frameRate, 150, 50);
 		
 	}
 	
