@@ -24,6 +24,10 @@ public class Level {
 		background = new Background(parent);
 		world = PhysiVals.getWorldInstance();
 		world.setContactListener(new ContactListener());
+		generateLevel();
+	}
+	
+	private void generateLevel() {
 		actors.add(new Floor(parent.width / 2, parent.height + 5, parent.width, 10));
 		actors.add(new PhysicalElement(parent.width / 2 - (220 / 2) + 35, parent.height - 35, Element.Wood010, parent));
 		actors.add(new PhysicalElement(parent.width / 2 + (220 / 2) - 35, parent.height - 35, Element.Wood010, parent));
