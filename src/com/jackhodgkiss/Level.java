@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import org.jbox2d.dynamics.World;
 
 import processing.core.PApplet;
+import processing.data.JSONArray;
+import processing.data.JSONObject;
+
 
 public class Level {
 
@@ -29,14 +32,23 @@ public class Level {
 	
 	private void generateLevel() {
 		actors.add(new Floor(parent.width / 2, parent.height + 5, parent.width, 10));
-		actors.add(new PhysicalElement(parent.width / 2 - (220 / 2) + 35, parent.height - 35, Element.Wood010, parent));
-		actors.add(new PhysicalElement(parent.width / 2 + (220 / 2) - 35, parent.height - 35, Element.Wood010, parent));
-		actors.add(new PhysicalElement(parent.width / 2, parent.height - 105, Element.Wood012, parent));
-		actors.add(new PhysicalElement(parent.width / 2 - (220 / 2) + 35, parent.height - 175, Element.Wood010, parent));
-		actors.add(new PhysicalElement(parent.width / 2 + (220 / 2) - 35, parent.height - 175, Element.Wood010, parent));
-		actors.add(new PhysicalElement(parent.width / 2, parent.height - 245, Element.Wood012, parent));
-		alien = new PhysicalAlien(parent.width / 2, parent.height - 315, Alien.values()[(int) parent.random(0, Alien.values().length)], parent);
-		actors.add(alien);
+		JSONObject json;
+		json = parent.loadJSONObject("data/Level_01.json");
+		JSONArray jsonArray = json.getJSONArray("actors");
+		for(int i = 0; i < jsonArray.size(); i++) {
+			JSONObject current = jsonArray.getJSONObject(i);
+			String type = current.getString("type");
+			String form = current.getString("form");
+			int x = current.getInt("x");
+			int y = current.getInt("y");
+			if(type.equals("Alien")) {
+				alien = new PhysicalAlien(x, y, Alien.valueOf(form), parent);
+				actors.add(alien);
+				System.out.println("Alien");
+			} else {
+				actors.add(new PhysicalElement(x, y, Element.valueOf(form), parent));
+			}
+		}		
 	}
 	
 	private void reset() {
