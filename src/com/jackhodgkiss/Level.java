@@ -22,6 +22,8 @@ public class Level {
 	
 	private PApplet parent;
 	
+	private int blocksToRemove;
+	
 	public Level(PApplet parent) {
 		this.parent = parent;
 		background = new Background(parent);
@@ -34,9 +36,9 @@ public class Level {
 		actors.add(new Floor(parent.width / 2, parent.height + 5, parent.width, 10));
 		JSONObject json;
 		json = parent.loadJSONObject("data/Level_01.json");
-		JSONArray jsonArray = json.getJSONArray("actors");
-		for(int i = 0; i < jsonArray.size(); i++) {
-			JSONObject current = jsonArray.getJSONObject(i);
+		JSONArray JSONActors = json.getJSONObject("level").getJSONArray("actors");
+		for(int i = 0; i < JSONActors.size(); i++) {
+			JSONObject current = JSONActors.getJSONObject(i);
 			String type = current.getString("type");
 			String form = current.getString("form");
 			int x = current.getInt("x");
@@ -44,11 +46,11 @@ public class Level {
 			if(type.equals("Alien")) {
 				alien = new PhysicalAlien(x, y, Alien.valueOf(form), parent);
 				actors.add(alien);
-				System.out.println("Alien");
 			} else {
 				actors.add(new PhysicalElement(x, y, Element.valueOf(form), parent));
 			}
-		}		
+		}
+		blocksToRemove = json.getJSONObject("level").getInt("blocksToRemove");
 	}
 	
 	private void reset() {
@@ -61,17 +63,6 @@ public class Level {
 	
 	public void update() {
 		world.step(1.0f / 60.0f, 8, 3);
-		if(parent.mousePressed == true) {
-			for(Actor a : actors) {
-				if(a instanceof PhysicalElement) {
-					if(a.body != null) {
-						if(a.getSprite().isMouseOver()) {
-							a.kill();
-						}
-					}
-				}
-			}
-		}
 		for(Actor a : actors) {
 			if(a.getBody() != null) {
 				a.update();
@@ -84,10 +75,27 @@ public class Level {
 		}
 		actors.removeAll(actorsToRemove);
 		actorsToRemove.clear();
+		if(blocksToRemove == 0) {
+			reset();
+		}
+	}
+	
+	public void mouseClicked() {
+		for(Actor a : actors) {
+			if(a instanceof PhysicalElement) {
+				if(a.body != null) {
+					if(a.getSprite().isMouseOver()) {
+						a.kill();
+						blocksToRemove--;
+					}
+				}
+			}
+		}
 	}
 	
 	public void draw() {
 		background.draw();
+		parent.text("Blocks To Remove: " + blocksToRemove, parent.width - 200, 50);
 		for(Actor a : actors) {
 			a.draw();
 		}

@@ -45,6 +45,13 @@ public class Main extends PApplet {
 		
 	}
 	
+	public void mouseClicked() {
+		if(state == State.PLAYING) {
+			level.mouseClicked();
+		}
+		System.out.println("Mouse Click");
+	}
+	
 	public static void main(String[] args) {
 		PApplet.main("com.jackhodgkiss.Main");
 	}

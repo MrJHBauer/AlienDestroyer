@@ -1,23 +1,41 @@
 {
-	"actors": [{
-		"type": "Alien",
-		"form": "BlueSuit",
-		"x": 640,
-		"y": 405
-	}, {
-		"type": "Element",
-		"form": "Explosive011",
-		"x": 565,
-		"y": 685
-	}, {
-		"type": "Element",
-		"form": "Wood010",
-		"x": 715,
-		"y": 685
-	}, {
-		"type": "Element",
-		"form": "Wood012",
-		"x": 640,
-		"y": 615
-	}]
+	"level": {
+		"actors": [{
+			"type": "Alien",
+			"form": "BlueSuit",
+			"x": 640,
+			"y": 405
+		}, {
+			"type": "Element",
+			"form": "Wood010",
+			"x": 565,
+			"y": 685
+		}, {
+			"type": "Element",
+			"form": "Wood010",
+			"x": 715,
+			"y": 685
+		}, {
+			"type": "Element",
+			"form": "Wood012",
+			"x": 640,
+			"y": 615
+		}, {
+			"type": "Element",
+			"form": "Wood010",
+			"x": 565,
+			"y": 545
+		}, {
+			"type": "Element",
+			"form": "Wood010",
+			"x": 715,
+			"y": 545
+		}, {
+			"type": "Element",
+			"form": "Wood012",
+			"x": 640,
+			"y": 475
+		}],
+		"blocksToRemove": 5
+	}
 }
